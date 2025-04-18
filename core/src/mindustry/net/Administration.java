@@ -51,12 +51,6 @@ public class Administration{
                     player.getInfo().messageInfractions = 0;
                 }
 
-                //prevent players from sending the same message twice in the span of 10 seconds
-                if(message.equals(player.getInfo().lastSentMessage) && Time.timeSinceMillis(player.getInfo().lastMessageTime) < 1000 * 10){
-                    player.sendMessage("[scarlet]You may not send the same message twice.");
-                    return null;
-                }
-
                 player.getInfo().lastSentMessage = message;
                 player.getInfo().lastMessageTime = Time.millis();
             }

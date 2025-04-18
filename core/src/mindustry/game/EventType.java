@@ -1,5 +1,6 @@
 package mindustry.game;
 
+import arc.Events;
 import arc.math.geom.*;
 import arc.util.*;
 import mindustry.core.GameState.*;
@@ -756,6 +757,32 @@ public class EventType{
             this.player = player;
             this.other = other;
             this.action = action;
+        }
+    }
+
+    public static class SendPacketEvent{
+        /** null for all, may emit again */
+        @Nullable
+        public NetConnection con;
+        /** only when call in sendExcept */
+        @Nullable
+        public NetConnection except;
+        public Object packet;
+        public boolean isCancelled;
+
+        private SendPacketEvent(){
+        }
+
+        private static final SendPacketEvent inst = new SendPacketEvent();
+
+        /** @return isCancelled */
+        public static boolean emit(@Nullable NetConnection con, @Nullable NetConnection except, Object packet){
+            inst.isCancelled = false;
+            inst.con = con;
+            inst.except = except;
+            inst.packet = packet;
+            Events.fire(inst);
+            return inst.isCancelled;
         }
     }
 }
