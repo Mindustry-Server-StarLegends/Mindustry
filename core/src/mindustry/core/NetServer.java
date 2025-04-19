@@ -601,7 +601,7 @@ public class NetServer implements ApplicationListener{
 
     @Remote(targets = Loc.client)
     public static void serverBinaryPacketReliable(Player player, String type, byte[] contents){
-        if(netServer.customBinaryPacketHandlers.containsKey(type)){
+        if(netServer.customPacketHandlers.containsKey(type)){
             for(var c : netServer.customBinaryPacketHandlers.get(type)){
                 c.get(player, contents);
             }
