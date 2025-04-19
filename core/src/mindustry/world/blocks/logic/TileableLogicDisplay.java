@@ -11,7 +11,6 @@ import arc.util.*;
 import mindustry.*;
 import mindustry.annotations.Annotations.*;
 import mindustry.graphics.*;
-import mindustry.logic.*;
 import mindustry.world.*;
 
 import static mindustry.Vars.*;
@@ -144,15 +143,6 @@ public class TileableLogicDisplay extends LogicDisplay{
 
         public int bits = 0;
         public boolean needsUpdate = false;
-
-        @Override
-        public double sense(LAccess sensor){
-            return switch(sensor){
-                case displayWidth -> tilesWidth * 32f;
-                case displayHeight -> tilesHeight * 32f;
-                default -> super.sense(sensor);
-            };
-        }
 
         @Override
         public void display(Table table){
