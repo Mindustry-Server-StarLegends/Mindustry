@@ -439,7 +439,7 @@ public class SerpuloTechTree{
                     });
                 });
 
-                node(additiveReconstructor, Seq.with(new SectorComplete(fungalPass)), () -> {
+                node(additiveReconstructor, Seq.with(new SectorComplete(craters)), () -> {
                     node(multiplicativeReconstructor, Seq.with(new SectorComplete(frontier)), () -> {
                         node(exponentialReconstructor, () -> {
                             node(tetrativeReconstructor, () -> {
