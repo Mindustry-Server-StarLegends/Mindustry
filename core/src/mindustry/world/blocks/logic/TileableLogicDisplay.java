@@ -217,10 +217,9 @@ public class TileableLogicDisplay extends LogicDisplay{
                 processCommands();
             }
 
-            float offset = 0.001f + (rootDisplay.buffer == null ? 0f : (rootDisplay.buffer.hashCode() % 1_000_000) / 1_000_000f * 0.01f);
+            Draw.z(Layer.block + 0.001f);
 
-            Draw.z(Layer.block + offset);
-
+            //TODO this is slow, many texture switches
             Draw.blend(Blending.disabled);
             Draw.draw(Draw.z(), () -> {
                 if(rootDisplay.buffer != null){
@@ -233,7 +232,7 @@ public class TileableLogicDisplay extends LogicDisplay{
             });
             Draw.blend();
 
-            Draw.z(Layer.block + 0.02f);
+            Draw.z(Layer.block + 0.002f);
 
             Draw.rect(tileRegion[bitmasks[bits]], x, y);
         }
