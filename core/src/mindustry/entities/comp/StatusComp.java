@@ -16,7 +16,7 @@ import static mindustry.Vars.*;
 
 @Component
 abstract class StatusComp implements Posc{
-    private Seq<StatusEntry> statuses = new Seq<>(4);
+    Seq<StatusEntry> statuses = new Seq<>(4);
     private transient Bits applied = new Bits(content.getBy(ContentType.status).size);
 
     //these are considered read-only

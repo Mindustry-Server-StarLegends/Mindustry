@@ -4052,7 +4052,7 @@ public class UnitTypes{
             drownTimeMultiplier = 2f;
             segments = 3;
             drawBody = false;
-            hidden = true;
+            hidden = false;
             crushDamage = 0.5f;
             aiController = HugAI::new;
             targetAir = false;
@@ -4072,7 +4072,7 @@ public class UnitTypes{
             drownTimeMultiplier = 4f;
             segments = 4;
             drawBody = false;
-            hidden = true;
+            hidden = false;
             crushDamage = 2f;
             aiController = HugAI::new;
             targetAir = false;
@@ -4338,6 +4338,7 @@ public class UnitTypes{
             engineSize = 2.3f;
             engineOffset = 6.5f;
             hidden = true;
+            physics = false;
 
             setEnginesMirror(
                 new UnitEngine(24 / 4f, -24 / 4f, 2.3f, 315f)
@@ -4359,6 +4360,7 @@ public class UnitTypes{
             bounded = false;
 
             outlineColor = Pal.darkOutline;
+            physics = false;
             isEnemy = false;
             hidden = true;
             useUnitCap = false;
