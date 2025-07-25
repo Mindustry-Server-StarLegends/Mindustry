@@ -85,6 +85,10 @@ public class Administration{
         dosBlacklist.add(address);
     }
 
+    public synchronized void unBlacklistDos(String address){
+        dosBlacklist.remove(address);
+    }
+
     public synchronized boolean isDosBlacklisted(String address){
         return dosBlacklist.contains(address);
     }
