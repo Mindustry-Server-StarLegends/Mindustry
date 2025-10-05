@@ -20,20 +20,22 @@ import static mindustry.Vars.*;
 abstract class WaterMoveComp implements Posc, Velc, Hitboxc, Unitc{
     @Import float x, y, rotation, speedMultiplier;
     @Import UnitType type;
+    @NoSync transient boolean landIsWater = false;
 
     private transient Trail tleft = new Trail(1), tright = new Trail(1);
     private transient Color trailColor = Blocks.water.mapColor.cpy().mul(1.5f);
 
+
     @Override
     public void update(){
-        boolean flying = isFlying();
+        boolean flying = isFlying() || landIsWater;
         for(int i = 0; i < 2; i++){
             Trail t = i == 0 ? tleft : tright;
             t.length = type.trailLength;
 
             int sign = i == 0 ? -1 : 1;
             float cx = Angles.trnsx(rotation - 90, type.waveTrailX * sign, type.waveTrailY) + x, cy = Angles.trnsy(rotation - 90, type.waveTrailX * sign, type.waveTrailY) + y;
-            t.update(cx, cy, world.floorWorld(cx, cy).isLiquid && !flying ? 1 : 0);
+            t.update(cx, cy, world.floorWorld(cx, cy).isLiquid && (!flying) ? 1 : 0);
         }
     }
 
@@ -63,7 +65,7 @@ abstract class WaterMoveComp implements Posc, Velc, Hitboxc, Unitc{
     @Replace
     @Override
     public SolidPred solidity(){
-        return isFlying() || ignoreSolids() ? null : EntityCollisions::waterSolid;
+        return isFlying() || ignoreSolids() || landIsWater ? null : EntityCollisions::waterSolid;
     }
 
     @Replace
@@ -80,7 +82,7 @@ abstract class WaterMoveComp implements Posc, Velc, Hitboxc, Unitc{
 
     public boolean onLiquid(){
         Tile tile = tileOn();
-        return tile != null && tile.floor().isLiquid;
+        return (tile != null && tile.floor().isLiquid) || landIsWater;
     }
 }
 
